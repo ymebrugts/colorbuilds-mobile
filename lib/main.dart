@@ -1,65 +1,43 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'app.dart';
+import 'env.dart';
+import 'infrastructure/mixins/AppMixin.dart';
+import 'presentation/mts_theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      enabled: AppMixin.getDevicePreviewStatus(APP_MODE),
+      builder: (context) => AppOriginator(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class AppOriginator extends StatefulWidget {
+  const AppOriginator({Key? key}) : super(key: key);
+  @override
+  _AppOriginatorState createState() => _AppOriginatorState();
+}
+
+class _AppOriginatorState extends State<AppOriginator> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Colorbuilds Develop',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.dark,
+      systemNavigationBarColor: MTStheme.primaryColor,
+    ));
 
-  final String title;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
+    return App();
   }
 }
