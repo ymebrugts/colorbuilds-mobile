@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.colorbuilds">
    <application
-        android:label="colorbuilds"
+        android:label="ColorBuilds"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

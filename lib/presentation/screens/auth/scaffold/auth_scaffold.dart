@@ -1,5 +1,4 @@
 import 'package:colorbuilds/infrastructure/providers/AssetsPathProvider.dart';
-import 'package:colorbuilds/presentation/styles/custom_paddings.dart';
 import 'package:flutter/material.dart';
 
 class AuthScaffold extends StatelessWidget {
@@ -10,7 +9,7 @@ class AuthScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: deviceWidthHorizontalPadding(context)),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
