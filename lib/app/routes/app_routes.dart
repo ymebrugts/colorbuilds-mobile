@@ -1,6 +1,6 @@
-import 'package:colorbuilds/presentation/screens/welcome/welcome.dart';
+import 'package:colorbuilds/presentation/screens/auth/login/login.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, Widget> appRoutes = {
-  '/': WelcomeScreen(),
+  '/': LoginScreen(),
 };

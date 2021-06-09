@@ -3,54 +3,56 @@ import 'package:flutter/material.dart';
 import '../constants/enums.dart';
 
 abstract class MTStheme {
-  static const Color canvasColor = Color(0xFF151515);
-  static const Color hintColor = secondaryTextColor;
-  static const Color errorColor = Colors.white70;
-  static const Color accentColor = Color(0xFFd0dbea);
-  static const Color primaryColor = Color(0xFFFA8E4B);
-  static const Color dividerColor = Color(0xFFd0dbea);
-  static const Color splashColor = Colors.transparent;
-  static const Color cardBgDarkColor = Color(0xFF222222);
-  static const Color primaryTextColor = Colors.white;
+  static const Color primaryColor = Colors.blue;
+  static const Color accentColor = Colors.indigo;
+
+  static Color primaryTextColor = Colors.grey.shade800;
   static const Color secondaryTextColor = Colors.white;
-  static const Color successColor = Color(0xFF02C338);
+
+  static const Color cardColor = Colors.white;
+  static const Color canvasColor = Colors.white;
+  static const Color dividerColor = Colors.grey;
+
+  static const Color errorColor = Colors.red;
+  static Color hintColor = primaryTextColor;
+  static const Color successColor = Colors.green;
 
   /// Custom ThemeData Colors
   static const List<Color> primaryGradientColors = [Color(0xFFB620E0), Color(0xFFEED810)];
 
-  static const TextTheme customSmallTextTheme = TextTheme(
-    headline1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 96),
-    headline2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 60),
-    headline3: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 48),
-    headline4: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 34),
-    headline5: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 24),
-    headline6: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 20),
-    subtitle1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 16),
-    subtitle2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 14),
+  static TextTheme customSmallTextTheme = TextTheme(
+    headline1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 40),
+    headline2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 36),
+    headline3: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 32),
+    headline4: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 28),
+    headline5: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 26),
+    headline6: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 24),
+    subtitle1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 20),
+    subtitle2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 18),
     bodyText1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 16),
     bodyText2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 14),
-    button: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 14),
-    caption: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 15),
-    overline: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, letterSpacing: 0, fontSize: 12),
+    button: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w600, fontSize: 12),
+    caption: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, fontSize: 10),
+    overline: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, fontSize: 8),
   );
 
-  static const TextTheme customMediumTextTheme = TextTheme(
-    headline1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 104),
-    headline2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 68),
-    headline3: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 56),
-    headline4: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 42),
+  static TextTheme customMediumTextTheme = TextTheme(
+    headline1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 48),
+    headline2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 44),
+    headline3: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 38),
+    headline4: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 36),
     headline5: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 32),
     headline6: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 28),
     subtitle1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 24),
     subtitle2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 22),
-    bodyText1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 24),
-    bodyText2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 22),
-    button: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 22),
-    caption: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 18),
-    overline: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, letterSpacing: 0, fontSize: 18),
+    bodyText1: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 20),
+    bodyText2: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w400, fontSize: 16),
+    button: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w600, fontSize: 14),
+    caption: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, fontSize: 12),
+    overline: TextStyle(color: secondaryTextColor, fontWeight: FontWeight.w400, fontSize: 10),
   );
 
-  static const TextTheme customLargeTextTheme = customMediumTextTheme;
+  static TextTheme customLargeTextTheme = customMediumTextTheme;
 
   static ThemeData customThemeData(DeviceScreenSize screenSize) {
     TextTheme _textTheme = customSmallTextTheme;
@@ -73,14 +75,12 @@ abstract class MTStheme {
       errorColor: errorColor,
       canvasColor: canvasColor,
       accentColor: accentColor,
-      splashColor: splashColor,
       buttonColor: primaryColor,
       primaryColor: primaryColor,
       dividerColor: dividerColor,
-      cardColor: cardBgDarkColor,
+      cardColor: cardColor,
       fontFamily: 'AvenirNextRounded',
       indicatorColor: primaryTextColor,
-      disabledColor: secondaryTextColor,
       scaffoldBackgroundColor: canvasColor,
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
@@ -97,13 +97,6 @@ abstract class MTStheme {
         TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
         TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
       }),
-      timePickerTheme: TimePickerThemeData(
-        dialHandColor: primaryColor,
-        dialTextColor: Colors.white,
-        dayPeriodTextColor: Colors.white,
-        entryModeIconColor: primaryColor,
-        hourMinuteTextColor: Colors.white,
-      ),
     );
   }
 }
