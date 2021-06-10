@@ -53,7 +53,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } on ApiAuthRepositoryLoginException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e.e));
       } catch (e) {
-        print(e);
         yield state.copyWith(formStatus: SubmissionFailed(UnexpectedException(e)));
       }
     }
