@@ -16,7 +16,7 @@ class CustomPasswordTextFormField extends StatefulWidget {
 }
 
 class _CustomPasswordTextFormFieldState extends State<CustomPasswordTextFormField> {
-  bool _obscureText = false;
+  bool _obscureText = true;
 
   void _obscure() => setState(() => _obscureText = !_obscureText);
 
