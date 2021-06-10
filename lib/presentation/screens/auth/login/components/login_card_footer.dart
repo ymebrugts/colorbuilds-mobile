@@ -1,4 +1,4 @@
-import 'package:colorbuilds/presentation/widgets/button/custom_material_button.dart';
+import 'package:colorbuilds/presentation/widgets/card/components/custom_card_footer.dart';
 import 'package:flutter/material.dart';
 
 class LoginCardFooter extends StatelessWidget {
@@ -6,19 +6,10 @@ class LoginCardFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _themeData = Theme.of(context);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomMaterialButton(
-          elevation: 0,
-          color: Colors.white,
-          text: 'create account',
-          textColor: _themeData.accentColor,
-        ),
-        CustomMaterialButton(text: 'login'),
-      ],
+    return CustomCardFooter(
+      firstText: 'create account',
+      secondText: 'login',
+      onPressed: () => Navigator.pushNamed(context, '/signup'),
     );
   }
 }

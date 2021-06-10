@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 class CustomPasswordTextFormField extends StatefulWidget {
   const CustomPasswordTextFormField({
     Key? key,
-    required this.controller,
+    this.controller,
     this.labelText = 'Password',
   }) : super(key: key);
   final String? labelText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   @override
   _CustomPasswordTextFormFieldState createState() => _CustomPasswordTextFormFieldState();

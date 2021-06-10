@@ -10,7 +10,7 @@ class AuthScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,

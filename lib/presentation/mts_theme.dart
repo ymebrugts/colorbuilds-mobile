@@ -94,7 +94,7 @@ abstract class MTStheme {
         valueIndicatorTextStyle: _textTheme.overline?.apply(color: Colors.white),
       ),
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
-        TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
         TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
       }),
     );

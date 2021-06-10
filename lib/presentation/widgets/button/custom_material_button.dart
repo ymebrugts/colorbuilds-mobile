@@ -24,6 +24,7 @@ class CustomMaterialButton extends StatelessWidget {
     final ThemeData _themeData = Theme.of(context);
 
     return MaterialButton(
+      minWidth: 0,
       padding: padding ?? const EdgeInsets.symmetric(horizontal: 5),
       elevation: elevation ?? 3,
       onPressed: onPressed ?? () {},
