@@ -1,9 +1,11 @@
+import 'package:colorbuilds/infrastructure/validations/validators/BaseValidator.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
     this.labelText,
+    this.validator,
     this.suffixIcon,
     this.controller,
     this.buildCounter,
@@ -14,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextEditingController? controller;
   final InputCounterWidgetBuilder? buildCounter;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,8 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         contentPadding: EdgeInsets.zero,
       ),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: validator ?? (v) => BaseValidator(v).validate,
     );
   }
 }

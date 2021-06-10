@@ -1,24 +1,26 @@
-import 'package:flutter/material.dart';
+import 'package:colorbuilds/infrastructure/validations/validators/BaseValidator.dart';
 
 import '../../../constants/enums.dart';
 import '../AbstractValidator.dart';
 import '../ValidationMessages.dart';
 import '../ValidationRegexes.dart';
 
-@immutable
 class EmailValidator extends AbstractValidator {
-  EmailValidator(this.text);
-  final String text;
+  final String? text;
+  late BaseValidator _baseValidator;
+
+  EmailValidator(this.text) {
+    _baseValidator = BaseValidator(text);
+  }
 
   final ValidationType type = ValidationType.Email;
 
   @override
   String? get validate {
-    if (!regexHasMatch) {
-      return ValidationMessages.get(type);
-    }
+    if (!_baseValidator.regexHasMatch) return _baseValidator.validate;
+    if (!regexHasMatch) return ValidationMessages.get(type);
   }
 
   @override
-  bool get regexHasMatch => RegExp(ValidationRegexes.get(type)).hasMatch(text);
+  bool get regexHasMatch => RegExp(ValidationRegexes.get(type)).hasMatch(text!);
 }

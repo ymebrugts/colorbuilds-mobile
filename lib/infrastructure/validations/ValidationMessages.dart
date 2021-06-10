@@ -6,7 +6,7 @@ import '../Exceptions/ValidationMessageNotFoundException.dart';
 @immutable
 class ValidationMessages {
   static final Map<ValidationType, String> _messages = {
-    ValidationType.Base: "Field can't be empty!",
+    ValidationType.Base: 'Field is required!',
     ValidationType.Email: 'Email is not valid!',
     ValidationType.Password: 'Password is not valid!',
   };

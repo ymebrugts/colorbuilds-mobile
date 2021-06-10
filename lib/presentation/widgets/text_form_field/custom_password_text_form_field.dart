@@ -1,3 +1,4 @@
+import 'package:colorbuilds/infrastructure/validations/validators/PasswordValidator.dart';
 import 'package:colorbuilds/presentation/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,7 @@ class _CustomPasswordTextFormFieldState extends State<CustomPasswordTextFormFiel
       obscureText: _obscureText,
       labelText: widget.labelText,
       controller: widget.controller,
+      validator: (v) => PasswordValidator(v).validate,
       suffixIcon: GestureDetector(onTap: _obscure, child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
       buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) => Text(
         currentLength! > 0 ? currentLength.toString() : '',
