@@ -16,8 +16,8 @@ class SignupScreen extends StatelessWidget {
 
   void _resolveSubmissionMessage(BuildContext context, SignupState state) {
     final CustomSnackbars customSnackbars = CustomSnackbars(context);
-    if (state.formStatus is SubmissionFailed) {
-      final formStatus = state.formStatus as SubmissionFailed;
+    if (state.formStatus is SubmissionFailure) {
+      final formStatus = state.formStatus as SubmissionFailure;
       customSnackbars.showErrorMessageSnackbar(formStatus.e.toString());
     } else if (state.formStatus is SubmissionSuccess) {
       final formStatus = state.formStatus as SubmissionSuccess;

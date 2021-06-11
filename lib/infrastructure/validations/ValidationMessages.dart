@@ -8,6 +8,8 @@ class ValidationMessages {
   static final Map<ValidationType, String> _messages = {
     ValidationType.Base: 'Field is required!',
     ValidationType.Email: 'Email is not valid!',
+    ValidationType.ExistingEmail: 'Email exists',
+    ValidationType.ExistingUsername: 'Username exists',
     ValidationType.Password: 'Password is not valid!',
   };
 

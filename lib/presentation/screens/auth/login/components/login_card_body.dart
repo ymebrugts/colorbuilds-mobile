@@ -32,7 +32,7 @@ class LoginCardBody extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomEmailTextFormField(controller: _emailController),
+          CustomEmailTextFormField(focusNodeContext: context, controller: _emailController),
           customVerticalSpace,
           CustomPasswordTextFormField(controller: _passwordController),
           customVerticalSpace,

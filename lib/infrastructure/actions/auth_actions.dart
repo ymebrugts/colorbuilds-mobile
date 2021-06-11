@@ -22,4 +22,14 @@ class AuthActions {
   }) {
     bloc.add(SignupSubmitted(email: email, username: username, password: password));
   }
+
+  ///
+  void checkEmail({required SignupBloc bloc, required String email}) {
+    bloc.add(SignupEmailSubmitted(email));
+  }
+
+  ///
+  void checkUsername({required SignupBloc bloc, required String username}) {
+    bloc.add(SignupUsernameSubmitted(username));
+  }
 }

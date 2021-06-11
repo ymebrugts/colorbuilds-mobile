@@ -1,5 +1,9 @@
 import 'package:colorbuilds/infrastructure/actions/auth_actions.dart';
+import 'package:colorbuilds/infrastructure/validations/validators/EmailValidator.dart';
+import 'package:colorbuilds/infrastructure/validations/validators/UsernameValidator.dart';
 import 'package:colorbuilds/logic/auth/signup/bloc/signup_bloc.dart';
+import 'package:colorbuilds/logic/auth/signup/bloc/signup_state.dart';
+import 'package:colorbuilds/logic/form_submission_status.dart';
 import 'package:colorbuilds/presentation/screens/auth/signup/components/signup_card_footer.dart';
 import 'package:colorbuilds/presentation/styles/custom_spaces.dart';
 import 'package:colorbuilds/presentation/widgets/text_form_field/custom_email_text_form_field.dart';
@@ -29,15 +33,57 @@ class SignupCardBody extends StatelessWidget {
     }
   }
 
+  void _checkEmail(BuildContext context, bool hasFocus) {
+    if (_emailController.text.isNotEmpty && !hasFocus) {
+      authActions.checkEmail(
+        bloc: context.read<SignupBloc>(),
+        email: _emailController.text,
+      );
+    }
+  }
+
+  void _checkUsername(BuildContext context, bool hasFocus) {
+    if (_usernameController.text.isNotEmpty && !hasFocus) {
+      authActions.checkUsername(
+        bloc: context.read<SignupBloc>(),
+        username: _usernameController.text,
+      );
+    }
+  }
+
+  bool _resolveValidationBuildWhen(dynamic _, SignupState state) {
+    return state.formStatus is FormValidationFailure || state.formStatus is FormValidationSuccess;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          CustomEmailTextFormField(controller: _emailController),
+          Focus(
+            onFocusChange: (hasFocus) => _checkEmail(context, hasFocus),
+            child: BlocBuilder<SignupBloc, SignupState>(
+              buildWhen: _resolveValidationBuildWhen,
+              builder: (context, state) => CustomEmailTextFormField(
+                focusNodeContext: context,
+                controller: _emailController,
+                validator: state.emailExists ? (v) => ExistingEmailValidator().validate : null,
+              ),
+            ),
+          ),
           customVerticalSpace,
-          CustomTextFormField(controller: _usernameController, labelText: 'username'),
+          Focus(
+            onFocusChange: (hasFocus) => _checkUsername(context, hasFocus),
+            child: BlocBuilder<SignupBloc, SignupState>(
+              buildWhen: _resolveValidationBuildWhen,
+              builder: (context, state) => CustomTextFormField(
+                labelText: 'Username',
+                controller: _usernameController,
+                validator: state.usernameExists ? (v) => ExistingUsernameValidator().validate : null,
+              ),
+            ),
+          ),
           customVerticalSpace,
           CustomPasswordTextFormField(controller: _passwordController),
           customVerticalSpace,

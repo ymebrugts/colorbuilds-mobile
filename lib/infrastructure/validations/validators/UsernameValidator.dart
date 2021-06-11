@@ -3,17 +3,16 @@ import 'package:colorbuilds/infrastructure/validations/validators/BaseValidator.
 import '../../../constants/enums.dart';
 import '../AbstractValidator.dart';
 import '../ValidationMessages.dart';
-import '../ValidationRegexes.dart';
 
-class EmailValidator extends AbstractValidator {
+class UsernameValidator extends AbstractValidator {
   final String? text;
   late BaseValidator _baseValidator;
 
-  EmailValidator(this.text) {
+  UsernameValidator(this.text) {
     _baseValidator = BaseValidator(text);
   }
 
-  final ValidationType type = ValidationType.Email;
+  final ValidationType type = ValidationType.Username;
 
   @override
   String? get validate {
@@ -22,11 +21,11 @@ class EmailValidator extends AbstractValidator {
   }
 
   @override
-  bool get regexHasMatch => RegExp(ValidationRegexes.get(type)).hasMatch(text!);
+  bool get regexHasMatch => true;
 }
 
-class ExistingEmailValidator {
-  final ValidationType type = ValidationType.ExistingEmail;
+class ExistingUsernameValidator {
+  final ValidationType type = ValidationType.ExistingUsername;
 
   String? get validate => ValidationMessages.get(type);
 }

@@ -9,14 +9,19 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.buildCounter,
+    this.textInputAction,
+    this.onFieldSubmitted,
     this.obscureText = false,
   }) : super(key: key);
   final String? labelText;
   final bool? obscureText;
   final Widget? suffixIcon;
+
+  final TextInputAction? textInputAction;
   final TextEditingController? controller;
-  final InputCounterWidgetBuilder? buildCounter;
   final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onFieldSubmitted;
+  final InputCounterWidgetBuilder? buildCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +30,12 @@ class CustomTextFormField extends StatelessWidget {
 
     return TextFormField(
       style: _textStyle,
+      autocorrect: false,
       controller: controller,
       obscureText: obscureText!,
       buildCounter: buildCounter,
+      onFieldSubmitted: onFieldSubmitted,
+      textInputAction: textInputAction ?? TextInputAction.next,
       decoration: InputDecoration(
         labelText: labelText,
         suffixIcon: suffixIcon,

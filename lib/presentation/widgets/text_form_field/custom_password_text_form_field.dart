@@ -26,6 +26,7 @@ class _CustomPasswordTextFormFieldState extends State<CustomPasswordTextFormFiel
       obscureText: _obscureText,
       labelText: widget.labelText,
       controller: widget.controller,
+      textInputAction: TextInputAction.done,
       validator: (v) => PasswordValidator(v).validate,
       suffixIcon: GestureDetector(onTap: _obscure, child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
       buildCounter: (BuildContext context, {int? currentLength, int? maxLength, bool? isFocused}) => Text(

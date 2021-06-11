@@ -8,6 +8,12 @@ class InitialFormStatus extends FormSubmissionStatus {
   const InitialFormStatus();
 }
 
+class FormValidating extends FormSubmissionStatus {}
+
+class FormValidationSuccess extends FormSubmissionStatus {}
+
+class FormValidationFailure extends FormSubmissionStatus {}
+
 class FormSubmitting extends FormSubmissionStatus {}
 
 class SubmissionSuccess extends FormSubmissionStatus {
@@ -15,7 +21,7 @@ class SubmissionSuccess extends FormSubmissionStatus {
   SubmissionSuccess({this.successResponse});
 }
 
-class SubmissionFailed extends FormSubmissionStatus {
+class SubmissionFailure extends FormSubmissionStatus {
   final dynamic e;
-  const SubmissionFailed(this.e);
+  const SubmissionFailure(this.e);
 }

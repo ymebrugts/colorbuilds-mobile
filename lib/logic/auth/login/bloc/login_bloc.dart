@@ -47,13 +47,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         await storage.write(key: 'token', value: creds.token);
       } on ApiUnauthenticatedException catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed(e.e));
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
       } on ApiAuthInternalServerException catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed(e.e));
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
       } on ApiAuthRepositoryLoginException catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed(e.e));
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
       } catch (e) {
-        yield state.copyWith(formStatus: SubmissionFailed(UnexpectedException(e)));
+        yield state.copyWith(formStatus: SubmissionFailure(UnexpectedException(e)));
       }
     }
   }

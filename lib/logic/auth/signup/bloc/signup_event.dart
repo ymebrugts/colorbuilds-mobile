@@ -11,3 +11,13 @@ class SignupSubmitted extends SignupEvent {
     required this.password,
   });
 }
+
+class SignupEmailSubmitted extends SignupEvent {
+  final String email;
+  SignupEmailSubmitted(this.email);
+}
+
+class SignupUsernameSubmitted extends SignupEvent {
+  final String username;
+  SignupUsernameSubmitted(this.username);
+}
