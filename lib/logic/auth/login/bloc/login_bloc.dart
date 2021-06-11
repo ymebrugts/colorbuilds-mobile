@@ -5,7 +5,7 @@ import 'package:colorbuilds/domain/data/models/JWTCredentials.dart';
 import 'package:colorbuilds/domain/data/models/User.dart';
 import 'package:colorbuilds/infrastructure/exceptions/UnexpectedException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiAuthRepositoryLoginException.dart';
-import 'package:colorbuilds/infrastructure/exceptions/http/ApiInternalServerException.dart';
+import 'package:colorbuilds/infrastructure/exceptions/http/ApiAuthInternalServerException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiUnauthenticatedException.dart';
 import 'package:colorbuilds/infrastructure/utils/jwt_utils.dart';
 import 'package:colorbuilds/logic/form_submission_status.dart';
@@ -48,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await storage.write(key: 'token', value: creds.token);
       } on ApiUnauthenticatedException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e.e));
-      } on ApiInternalServerException catch (e) {
+      } on ApiAuthInternalServerException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e.e));
       } on ApiAuthRepositoryLoginException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e.e));

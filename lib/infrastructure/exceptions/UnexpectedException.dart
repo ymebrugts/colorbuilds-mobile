@@ -1,5 +1,5 @@
-class UnexpectedException implements Exception {
-  final dynamic e;
-  UnexpectedException(this.e);
-  final String exception = 'Something went wrong!';
+import 'package:colorbuilds/infrastructure/exceptions/contracts/AbstractPrintableException.dart';
+
+class UnexpectedException extends AbstractPrintableException {
+  UnexpectedException(dynamic exception) : super(exception);
 }

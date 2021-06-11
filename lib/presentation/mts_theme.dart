@@ -95,7 +95,7 @@ abstract class MTStheme {
       ),
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
-        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
       }),
     );
   }
