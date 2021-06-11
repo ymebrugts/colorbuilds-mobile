@@ -94,8 +94,8 @@ abstract class MTStheme {
         valueIndicatorTextStyle: _textTheme.overline?.apply(color: Colors.white),
       ),
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
-        TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
-        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
       }),
     );
   }

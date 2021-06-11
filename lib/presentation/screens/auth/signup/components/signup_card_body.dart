@@ -10,6 +10,7 @@ import 'package:colorbuilds/presentation/widgets/text_form_field/custom_email_te
 import 'package:colorbuilds/presentation/widgets/text_form_field/custom_password_text_form_field.dart';
 import 'package:colorbuilds/presentation/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupCardBody extends StatelessWidget {
@@ -21,6 +22,7 @@ class SignupCardBody extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _onSubmit(BuildContext context) {
+    HapticFeedback.mediumImpact();
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
 
