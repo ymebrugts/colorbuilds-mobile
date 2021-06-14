@@ -1,4 +1,6 @@
+import 'package:colorbuilds/infrastructure/actions/auth_actions.dart';
 import 'package:colorbuilds/infrastructure/providers/AssetsPathProvider.dart';
+import 'package:colorbuilds/logic/auth/login/bloc/login_bloc.dart';
 import 'package:colorbuilds/logic/session/bloc/session_cubit.dart';
 import 'package:colorbuilds/presentation/screens/auth/scaffold/auth_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +16,20 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final AuthActions _authActions = AuthActions();
+
   @override
   void initState() {
     super.initState();
-    _resolveNavigation(context, context.read<SessionCubit>().state);
+    _authActions.autoLogin(bloc: context.read<LoginBloc>());
   }
 
   void _resolveNavigation(BuildContext context, SessionState state) {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
-      if (state is InitialSession) Navigator.of(context).pushNamed('/login');
+      if (state is AuthenticatedSession)
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      else
+        Navigator.of(context).pushNamed('/login');
     });
   }
 

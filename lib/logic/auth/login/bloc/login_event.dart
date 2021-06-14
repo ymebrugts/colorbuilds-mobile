@@ -6,3 +6,5 @@ class LoginSubmitted extends LoginEvent {
 
   LoginSubmitted({required this.email, required this.password});
 }
+
+class AutoLoginAttempted extends LoginEvent {}

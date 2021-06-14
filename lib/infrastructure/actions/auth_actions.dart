@@ -32,4 +32,9 @@ class AuthActions {
   void checkUsername({required SignupBloc bloc, required String username}) {
     bloc.add(SignupUsernameSubmitted(username));
   }
+
+  ///
+  void autoLogin({required LoginBloc bloc}) {
+    bloc.add(AutoLoginAttempted());
+  }
 }

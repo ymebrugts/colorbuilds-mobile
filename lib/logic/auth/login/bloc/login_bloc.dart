@@ -29,6 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    /// Login Submitted
     if (event is LoginSubmitted) {
       yield state.copyWith(
         email: event.email,
@@ -46,6 +47,42 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         sessionCubit.authenticate(user);
 
         await storage.write(key: 'token', value: creds.token);
+      } on ApiUnauthenticatedException catch (e) {
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
+      } on ApiAuthInternalServerException catch (e) {
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
+      } on ApiAuthRepositoryLoginException catch (e) {
+        yield state.copyWith(formStatus: SubmissionFailure(e.e));
+      } catch (e) {
+        yield state.copyWith(formStatus: SubmissionFailure(UnexpectedException(e)));
+      }
+    }
+
+    /// AutoLogin attempt
+    else if (event is AutoLoginAttempted) {
+      try {
+        final bool tokenExists = await storage.containsKey(key: 'token');
+
+        if (tokenExists) {
+          final String token = (await storage.read(key: 'token'))!;
+
+          final JWTUtils jwtUtils = JWTUtils(token: token);
+          final User user = User.fromMap(jwtUtils.parseJwt());
+
+          const int expiry = 2547489600000; // user.expiry!;
+          final expirationDate = DateTime.fromMillisecondsSinceEpoch(expiry);
+          final bool isExpired = expirationDate.isBefore(DateTime.now());
+
+          if (!isExpired) {
+            yield state.copyWith(formStatus: SubmissionSuccess());
+            sessionCubit.authenticate(user);
+          } else {
+            await storage.delete(key: 'token');
+            sessionCubit.unauthenticate();
+          }
+        } else {
+          sessionCubit.unauthenticate();
+        }
       } on ApiUnauthenticatedException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailure(e.e));
       } on ApiAuthInternalServerException catch (e) {
