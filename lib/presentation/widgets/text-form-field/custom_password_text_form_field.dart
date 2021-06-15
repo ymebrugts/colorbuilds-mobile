@@ -1,5 +1,5 @@
 import 'package:colorbuilds/infrastructure/validations/validators/PasswordValidator.dart';
-import 'package:colorbuilds/presentation/widgets/text_form_field/custom_text_form_field.dart';
+import 'package:colorbuilds/presentation/widgets/text-form-field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomPasswordTextFormField extends StatefulWidget {

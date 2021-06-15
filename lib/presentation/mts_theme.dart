@@ -17,6 +17,8 @@ abstract class MTStheme {
   static Color hintColor = primaryTextColor;
   static const Color successColor = Colors.green;
 
+  static const Color darkOrchid = Color(0xFF9C27B0);
+
   /// Custom ThemeData Colors
   static const List<Color> primaryGradientColors = [Color(0xFFB620E0), Color(0xFFEED810)];
 

@@ -10,7 +10,8 @@ import 'logic/auth/login/bloc/login_bloc.dart';
 import 'presentation/mts_theme.dart';
 
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
+  App({Key? key, required this.setupConfigurations}) : super(key: key);
+  final Function()? setupConfigurations;
   final AppRouter _appRouter = AppRouter();
 
   @override
