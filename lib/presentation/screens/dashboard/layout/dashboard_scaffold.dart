@@ -31,13 +31,13 @@ class _DashboardScaffoldState extends State<DashboardScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Padding(padding: const EdgeInsets.all(20), child: _body),
+      appBar: AppBar(title: Text(_title)),
       drawer: DashboardDrawer(
         onAccount: () => _navigate('Account'),
         onMyBuilds: () => _navigate('My.Builds'),
         onColorGuide: () => _navigate('Color.Guidance'),
       ),
-      body: _body,
-      appBar: AppBar(title: Text(_title)),
     );
   }
 }

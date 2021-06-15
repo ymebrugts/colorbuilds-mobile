@@ -3,28 +3,33 @@ import 'package:flutter/material.dart';
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     Key? key,
+    this.icon,
+    this.padding,
+    this.text = '',
     this.onPressed,
-    required this.text,
     required this.textColor,
     required this.borderColor,
     required this.backgroundColor,
   }) : super(key: key);
-  final String text;
+  final String? text;
+  final IconData? icon;
   final Color textColor;
   final Color borderColor;
+  final EdgeInsets? padding;
   final Color backgroundColor;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData _themeData = Theme.of(context);
+    final TextStyle _textStyle = _themeData.textTheme.button!.copyWith(color: textColor);
 
     return ElevatedButton(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
         foregroundColor: MaterialStateProperty.all<Color>(textColor),
+        padding: MaterialStateProperty.all<EdgeInsets>(padding ?? EdgeInsets.all(15)),
+        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
         overlayColor: MaterialStateProperty.resolveWith(
           (states) => states.contains(MaterialState.pressed) ? textColor.withOpacity(0.2) : null,
         ),
@@ -36,10 +41,9 @@ class CustomElevatedButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed ?? () {},
-      child: Text(
-        text.toUpperCase(),
-        style: _themeData.textTheme.button?.copyWith(color: textColor),
-      ),
+      child: icon != null
+          ? Icon(icon, color: textColor, size: _textStyle.apply(fontSizeDelta: 10).fontSize)
+          : Text(text!.toUpperCase(), style: _textStyle),
     );
   }
 }
