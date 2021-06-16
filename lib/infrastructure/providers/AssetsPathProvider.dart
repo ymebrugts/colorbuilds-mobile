@@ -14,5 +14,5 @@ class AssetsPathProvider implements AssetsPathProviderInterface {
   String getCompany(String name) => '${IMAGES_PATH}company/$name';
 
   @override
-  String getHome(String name) => '${IMAGES_PATH}home_dashboard/$name';
+  String getDashboard(String name) => '${IMAGES_PATH}dashboard/$name';
 }
