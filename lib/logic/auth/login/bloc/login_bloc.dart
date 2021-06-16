@@ -78,10 +78,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             sessionCubit.authenticate(user);
           } else {
             await storage.delete(key: 'token');
-            sessionCubit.unauthenticate();
+            sessionCubit.initialize();
           }
         } else {
-          sessionCubit.unauthenticate();
+          sessionCubit.initialize();
         }
       } on ApiUnauthenticatedException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailure(e.e));

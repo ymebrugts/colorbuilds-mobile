@@ -7,6 +7,9 @@ part 'session_state.dart';
 class SessionCubit extends Cubit<SessionState> {
   SessionCubit() : super(InitialSession());
 
+  /// [SessionState] makes [InitialSession]
+  void initialize() => emit(InitialSession());
+
   /// Takes authenticated [user]
   ///
   /// [SessionState] makes [AuthenticatedSession]

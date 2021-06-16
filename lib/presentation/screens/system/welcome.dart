@@ -21,16 +21,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    if (context.read<SessionCubit>().state is! UnauthenticatedSession)
-      _authActions.autoLogin(bloc: context.read<LoginBloc>());
+    _authActions.autoLogin(bloc: context.read<LoginBloc>());
   }
 
   void _resolveNavigation(BuildContext context, SessionState state) {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       if (state is AuthenticatedSession)
         Navigator.pushReplacementNamed(context, '/dashboard');
-      else
+      else {
         Navigator.of(context).pushNamed('/login');
+      }
     });
   }
 
