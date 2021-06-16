@@ -1,0 +1,96 @@
+import 'dart:convert';
+
+import 'package:colorbuilds/infrastructure/exceptions/data/BuildorderRowModelDataException.dart';
+import 'package:equatable/equatable.dart';
+
+class BuildorderRow extends Equatable {
+  final int id;
+  final int? orderRow;
+  final int? supply;
+  final int? minutes;
+  final int? seconds;
+  final int? resources;
+  final bool? mineralsSelected;
+  final bool? gasSelected;
+  final String? notes;
+
+  const BuildorderRow({
+    required this.id,
+    this.orderRow,
+    this.supply,
+    this.minutes,
+    this.seconds,
+    this.resources,
+    required this.mineralsSelected,
+    required this.gasSelected,
+    this.notes,
+  });
+
+  BuildorderRow copyWith({
+    int? id,
+    int? orderRow,
+    int? supply,
+    int? minutes,
+    int? seconds,
+    int? resources,
+    bool? mineralsSelected,
+    bool? gasSelected,
+    String? notes,
+  }) {
+    return BuildorderRow(
+      id: id ?? this.id,
+      orderRow: orderRow ?? this.orderRow,
+      supply: supply ?? this.supply,
+      minutes: minutes ?? this.minutes,
+      seconds: seconds ?? this.seconds,
+      resources: resources ?? this.resources,
+      mineralsSelected: mineralsSelected ?? this.mineralsSelected,
+      gasSelected: gasSelected ?? this.gasSelected,
+      notes: notes ?? this.notes,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'orderRow': orderRow,
+      'supply': supply,
+      'minutes': minutes,
+      'seconds': seconds,
+      'resources': resources,
+      'mineralsSelected': mineralsSelected,
+      'gasSelected': gasSelected,
+      'notes': notes,
+    };
+  }
+
+  factory BuildorderRow.fromMap(Map<String, dynamic> map) {
+    try {
+      return BuildorderRow(
+        id: int.parse(map['id'].toString()),
+        orderRow: int.tryParse(map['orderRow'].toString()),
+        supply: int.tryParse(['supply'].toString()),
+        minutes: int.tryParse(['minutes'].toString()),
+        seconds: int.tryParse(['seconds'].toString()),
+        resources: int.tryParse(['resources'].toString()),
+        mineralsSelected: map['mineralsSelected'] != null ? map['mineralsSelected'] as bool : null,
+        gasSelected: map['gasSelected'] != null ? map['gasSelected'] as bool : null,
+        notes: map['notes'].toString(),
+      );
+    } catch (e) {
+      throw BuildorderRowModelDataException(e);
+    }
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory BuildorderRow.fromJson(String source) => BuildorderRow.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool get stringify => true;
+
+  @override
+  List<Object> get props {
+    return [id];
+  }
+}
