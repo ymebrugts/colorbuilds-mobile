@@ -1,6 +1,7 @@
 import 'package:colorbuilds/presentation/mts_theme.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/components/dashboard_drawer_elevated_button.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/components/dashboard_drawer_header.dart';
+import 'package:colorbuilds/presentation/screens/dashboard/components/dashboard_drawer_user_creds.dart';
 import 'package:flutter/material.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -8,11 +9,11 @@ class DashboardDrawer extends StatelessWidget {
     Key? key,
     required this.onMyBuilds,
     required this.onColorGuide,
-    required this.onAccount,
+    required this.onLogout,
   }) : super(key: key);
   final Function() onMyBuilds;
   final Function() onColorGuide;
-  final Function() onAccount;
+  final Function() onLogout;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +39,11 @@ class DashboardDrawer extends StatelessWidget {
             borderColor: _themeData.primaryColor,
             backgroundColor: _themeData.primaryColor,
           ),
+          Divider(),
+          DashboardDrawerUserCreds(),
           DashboardDrawerElevatedButton(
-            text: 'account',
-            onPressed: onAccount,
+            text: 'logout',
+            onPressed: onLogout,
             textColor: _darkOrchid,
             borderColor: _darkOrchid,
             backgroundColor: Colors.white,
