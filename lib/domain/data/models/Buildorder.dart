@@ -89,7 +89,16 @@ class Buildorder extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
-    return [id, name, privateBuildorder];
-  }
+  List<Object> get props => [id, name, privateBuildorder];
+
+  final Map<int, String> _racesMap = const {
+    0: 'Protoss',
+    1: 'Terran',
+    2: 'Zerg',
+    3: 'Random',
+  };
+
+  String? get getYourRace => _racesMap[int.parse(yourRace!)];
+
+  String? get getOpponentRace => _racesMap[int.parse(opponentRace!)];
 }
