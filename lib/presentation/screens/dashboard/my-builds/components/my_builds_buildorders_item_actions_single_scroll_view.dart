@@ -9,7 +9,7 @@ class MyBuildsBuildordersItemActionsSingleScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData _themeData = Theme.of(context);
-    final Color _darkOrchid = MTStheme.darkOrchid;
+    const Color _darkOrchid = MTStheme.darkOrchid;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
