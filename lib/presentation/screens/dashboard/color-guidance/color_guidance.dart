@@ -1,11 +1,27 @@
+import 'package:colorbuilds/infrastructure/actions/buildorders_actions.dart';
+import 'package:colorbuilds/logic/buildorders/bloc/buildorders_bloc.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/components/color_guidance_buildorders_filter_list_view.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/components/color_guidance_buildorders_list_view.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/components/color_guidance_race_filter_section.dart';
 import 'package:colorbuilds/presentation/styles/custom_spaces.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ColorGuidanceScreen extends StatelessWidget {
+class ColorGuidanceScreen extends StatefulWidget {
   const ColorGuidanceScreen({Key? key}) : super(key: key);
+
+  @override
+  _ColorGuidanceScreenState createState() => _ColorGuidanceScreenState();
+}
+
+class _ColorGuidanceScreenState extends State<ColorGuidanceScreen> {
+  final BuildordersActions _buildordersActions = BuildordersActions();
+
+  @override
+  void initState() {
+    super.initState();
+    _buildordersActions.index(bloc: context.read<BuildordersBloc>());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +36,7 @@ class ColorGuidanceScreen extends StatelessWidget {
           customVerticalSpace,
           ColorGuidanceBuildordersFilterListView(),
           Divider(),
+          SizedBox(height: 5),
           ColorGuidanceBuildordersListView(),
         ],
       ),
