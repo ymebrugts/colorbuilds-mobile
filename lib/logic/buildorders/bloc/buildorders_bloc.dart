@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:colorbuilds/domain/data/models/Buildorder.dart';
 import 'package:colorbuilds/infrastructure/exceptions/UnexpectedException.dart';
+import 'package:colorbuilds/infrastructure/exceptions/bloc/BuildordersFilterByRaceException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiBuildordersRepositoryIndexException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiBuildordersRepositoryInternalServerException.dart';
 import 'package:colorbuilds/logic/api_response_status.dart';
@@ -31,6 +32,7 @@ class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
         final List<Buildorder>? result = await buildOrdersRepository.index(token: token!);
 
         yield state.copyWith(
+          filtered: result,
           buildorders: result,
           apiResponseStatus: ApiResponseStatusSuccess(),
         );
@@ -40,6 +42,36 @@ class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
         yield state.copyWith(apiResponseStatus: ApiResponseStatusFailure(e.e));
       } catch (e) {
         yield state.copyWith(apiResponseStatus: ApiResponseStatusFailure(UnexpectedException(e)));
+      }
+    }
+
+    /// Filtering with Races
+    else if (event is FilterByRace) {
+      try {
+        List<Buildorder>? _filtered = [];
+        final List<Buildorder> buildorders = state.buildorders;
+
+        if (buildorders.isNotEmpty) {
+          _filtered = buildorders.where((Buildorder model) {
+            if (event.opponentRace != null && event.yourRace != null) {
+              return model.getOpponentRace == event.opponentRace && model.getYourRace == event.yourRace;
+            } else if (event.opponentRace != null) {
+              return model.getOpponentRace == event.opponentRace;
+            } else if (event.yourRace != null) {
+              return model.getYourRace == event.yourRace;
+            }
+
+            return true;
+          }).toList();
+
+          if (event.yourRace == null && event.opponentRace == null) {
+            yield state.copyWith(filtered: buildorders);
+          } else {
+            yield state.copyWith(filtered: _filtered);
+          }
+        }
+      } catch (e) {
+        throw BuildordersFilterByRaceException(e);
       }
     }
   }

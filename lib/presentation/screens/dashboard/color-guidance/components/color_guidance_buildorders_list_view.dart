@@ -13,7 +13,7 @@ class ColorGuidanceBuildordersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BuildordersBloc, BuildordersState>(
       builder: (context, state) {
-        final List<Buildorder> items = state.buildorders;
+        final List<Buildorder> items = state.filtered;
 
         return state.apiResponseStatus is ApiResponseStatusInProgress
             ? CustomCircularProgressIndicator()
