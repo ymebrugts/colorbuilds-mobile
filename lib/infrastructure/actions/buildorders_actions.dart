@@ -6,11 +6,17 @@ class BuildordersActions {
     bloc.add(AllBuildordersRequested());
   }
 
+  ///
   void filterByRace({
     String? yourRace,
     String? opponentRace,
     required BuildordersBloc bloc,
   }) {
-    bloc.add(FilterByRace(yourRace: yourRace, opponentRace: opponentRace));
+    bloc.add(FilteredByRace(yourRace: yourRace, opponentRace: opponentRace));
+  }
+
+  ///
+  void filterByName({String? name, required BuildordersBloc bloc}) {
+    bloc.add(FilteredByName(name: name));
   }
 }

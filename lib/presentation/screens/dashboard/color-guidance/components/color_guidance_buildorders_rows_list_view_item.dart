@@ -1,8 +1,10 @@
+import 'package:colorbuilds/domain/data/models/BuildorderRow.dart';
 import 'package:colorbuilds/presentation/mts_theme.dart';
 import 'package:flutter/material.dart';
 
-class ColorGuidanceBuildordersListViewItem extends StatelessWidget {
-  const ColorGuidanceBuildordersListViewItem({Key? key}) : super(key: key);
+class ColorGuidanceBuildordersRowsListViewItem extends StatelessWidget {
+  const ColorGuidanceBuildordersRowsListViewItem({Key? key, required this.row}) : super(key: key);
+  final BuildorderRow row;
 
   @override
   Widget build(BuildContext context) {
@@ -10,24 +12,26 @@ class ColorGuidanceBuildordersListViewItem extends StatelessWidget {
     final TextStyle _textStyle = _themeData.textTheme.bodyText2!;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Wrap(
-        alignment: WrapAlignment.spaceBetween,
+        spacing: 5,
         runSpacing: 5,
+        alignment: WrapAlignment.spaceBetween,
         children: [
           RichText(
             text: TextSpan(
               style: _textStyle,
-              text: '120 - (220:202020) ',
+              text: '${row.supply} - (${row.minutes}:${row.seconds}) - ${row.getResourcesString}',
               children: [
                 TextSpan(
-                  text: ' Assimilator - Gas',
+                  text: ' Action',
                   style: _textStyle.apply(color: MTStheme.successColor),
                 ),
               ],
             ),
           ),
-          Text('Buildorder Name', style: _textStyle.apply(fontWeightDelta: 1)),
+          Text(row.notes.toString(), style: _textStyle.apply(fontWeightDelta: 1)),
+          Divider(),
         ],
       ),
     );

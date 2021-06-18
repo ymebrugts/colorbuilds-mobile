@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:colorbuilds/domain/data/models/Buildorder.dart';
 import 'package:colorbuilds/infrastructure/exceptions/UnexpectedException.dart';
+import 'package:colorbuilds/infrastructure/exceptions/bloc/BuildordersFilterByNameException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/bloc/BuildordersFilterByRaceException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiBuildordersRepositoryIndexException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/http/ApiBuildordersRepositoryInternalServerException.dart';
@@ -45,8 +46,8 @@ class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
       }
     }
 
-    /// Filtering with Races
-    else if (event is FilterByRace) {
+    /// Filtering by Races
+    else if (event is FilteredByRace) {
       try {
         List<Buildorder>? _filtered = [];
         final List<Buildorder> buildorders = state.buildorders;
@@ -72,6 +73,26 @@ class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
         }
       } catch (e) {
         throw BuildordersFilterByRaceException(e);
+      }
+    }
+
+    /// Filtering by Name
+    else if (event is FilteredByName) {
+      try {
+        List<Buildorder>? _filtered = [];
+        final List<Buildorder> buildorders = state.buildorders;
+
+        if (buildorders.isNotEmpty) {
+          _filtered = buildorders.where((Buildorder model) => event.name == model.name).toList();
+
+          if (event.name != null) {
+            yield state.copyWith(filtered: _filtered);
+          } else {
+            yield state.copyWith(filtered: buildorders);
+          }
+        }
+      } catch (e) {
+        throw BuildordersFilterByNameException(e);
       }
     }
   }

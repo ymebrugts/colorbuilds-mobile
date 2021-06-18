@@ -10,8 +10,8 @@ class BuildorderRow extends Equatable {
   final int? minutes;
   final int? seconds;
   final int? resources;
-  final bool? mineralsSelected;
-  final bool? gasSelected;
+  final bool mineralsSelected;
+  final bool gasSelected;
   final String? notes;
 
   const BuildorderRow({
@@ -69,12 +69,12 @@ class BuildorderRow extends Equatable {
       return BuildorderRow(
         id: int.parse(map['id'].toString()),
         orderRow: int.tryParse(map['orderRow'].toString()),
-        supply: int.tryParse(['supply'].toString()),
-        minutes: int.tryParse(['minutes'].toString()),
-        seconds: int.tryParse(['seconds'].toString()),
-        resources: int.tryParse(['resources'].toString()),
-        mineralsSelected: map['mineralsSelected'] != null ? map['mineralsSelected'] as bool : null,
-        gasSelected: map['gasSelected'] != null ? map['gasSelected'] as bool : null,
+        supply: int.tryParse(map['supply'].toString()),
+        minutes: int.tryParse(map['minutes'].toString()),
+        seconds: int.tryParse(map['seconds'].toString()),
+        resources: int.tryParse(map['resources'].toString()),
+        mineralsSelected: map['mineralsSelected'] as bool,
+        gasSelected: map['gasSelected'] as bool,
         notes: map['notes'].toString(),
       );
     } catch (e) {
@@ -90,7 +90,16 @@ class BuildorderRow extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
-    return [id];
+  List<Object> get props => [id];
+
+  String get getResourcesString {
+    if (gasSelected && mineralsSelected) {
+      return '@$resources Gas - @$resources Minerals';
+    } else if (gasSelected) {
+      return '@$resources Gas';
+    } else if (mineralsSelected) {
+      return '@$resources Minerals';
+    }
+    return '';
   }
 }

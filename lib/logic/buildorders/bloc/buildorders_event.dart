@@ -9,9 +9,15 @@ abstract class BuildordersEvent extends Equatable {
 
 class AllBuildordersRequested extends BuildordersEvent {}
 
-class FilterByRace extends BuildordersEvent {
+class FilteredByRace extends BuildordersEvent {
   final String? yourRace;
   final String? opponentRace;
 
-  const FilterByRace({this.yourRace, this.opponentRace});
+  const FilteredByRace({this.yourRace, this.opponentRace});
+}
+
+class FilteredByName extends BuildordersEvent {
+  final String? name;
+
+  const FilteredByName({this.name});
 }
