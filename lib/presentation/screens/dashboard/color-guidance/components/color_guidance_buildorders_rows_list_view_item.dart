@@ -3,7 +3,8 @@ import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/compon
 import 'package:flutter/material.dart';
 
 class ColorGuidanceBuildordersRowsListViewItem extends StatelessWidget {
-  const ColorGuidanceBuildordersRowsListViewItem({Key? key, required this.row}) : super(key: key);
+  const ColorGuidanceBuildordersRowsListViewItem({Key? key, required this.row, required this.isLast}) : super(key: key);
+  final bool isLast;
   final BuildorderRow row;
 
   @override
@@ -11,18 +12,15 @@ class ColorGuidanceBuildordersRowsListViewItem extends StatelessWidget {
     final ThemeData _themeData = Theme.of(context);
     final TextStyle _textStyle = _themeData.textTheme.bodyText2!;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Wrap(
-        spacing: 5,
-        runSpacing: 5,
-        alignment: WrapAlignment.spaceBetween,
-        children: [
-          ColorGuidanceBuildordersRowsItemActionRichText(row: row, textStyle: _textStyle),
-          Text(row.notes.toString(), style: _textStyle.apply(fontWeightDelta: 1)),
-          Divider(),
-        ],
-      ),
+    return Wrap(
+      spacing: 5,
+      runSpacing: 5,
+      alignment: WrapAlignment.spaceBetween,
+      children: [
+        ColorGuidanceBuildordersRowsItemActionRichText(row: row, textStyle: _textStyle),
+        if (row.notes!.isNotEmpty) Text(row.notes.toString(), style: _textStyle.apply(fontWeightDelta: 1)),
+        if (!isLast) Divider(height: 20),
+      ],
     );
   }
 }

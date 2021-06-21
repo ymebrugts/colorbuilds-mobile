@@ -13,7 +13,7 @@ class ColorGuidanceBuildordersRowsListView extends StatelessWidget {
       itemCount: rows.length,
       physics: BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int i) {
-        return ColorGuidanceBuildordersRowsListViewItem(row: rows[i]);
+        return ColorGuidanceBuildordersRowsListViewItem(row: rows[i], isLast: rows.length == i + 1);
       },
     );
   }
