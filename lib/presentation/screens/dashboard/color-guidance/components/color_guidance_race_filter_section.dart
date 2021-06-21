@@ -3,6 +3,7 @@ import 'package:colorbuilds/logic/buildorders/bloc/buildorders_bloc.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/components/color_guidance_race_buttons_row.dart';
 import 'package:colorbuilds/presentation/styles/custom_spaces.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ColorGuidanceRaceFilterSection extends StatefulWidget {
@@ -18,11 +19,13 @@ class _ColorGuidanceRaceFilterSectionState extends State<ColorGuidanceRaceFilter
   final BuildordersActions _buildordersActions = BuildordersActions();
 
   void _selectYourRace(BuildContext context, String? race) {
+    HapticFeedback.mediumImpact();
     setState(() => _yourRace != race ? _yourRace = race : _yourRace = null);
     _filterByRace();
   }
 
   void _selectOpponentRace(BuildContext context, String? race) {
+    HapticFeedback.mediumImpact();
     setState(() => _opponentRace != race ? _opponentRace = race : _opponentRace = null);
     _filterByRace();
   }

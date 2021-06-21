@@ -1,5 +1,5 @@
 import 'package:colorbuilds/domain/data/models/BuildorderRow.dart';
-import 'package:colorbuilds/presentation/mts_theme.dart';
+import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/components/color_guidance_buildorders_rows_item_action_rich_text.dart';
 import 'package:flutter/material.dart';
 
 class ColorGuidanceBuildordersRowsListViewItem extends StatelessWidget {
@@ -18,18 +18,7 @@ class ColorGuidanceBuildordersRowsListViewItem extends StatelessWidget {
         runSpacing: 5,
         alignment: WrapAlignment.spaceBetween,
         children: [
-          RichText(
-            text: TextSpan(
-              style: _textStyle,
-              text: '${row.supply} - (${row.minutes}:${row.seconds}) - ${row.getResourcesString}',
-              children: [
-                TextSpan(
-                  text: ' Action',
-                  style: _textStyle.apply(color: MTStheme.successColor),
-                ),
-              ],
-            ),
-          ),
+          ColorGuidanceBuildordersRowsItemActionRichText(row: row, textStyle: _textStyle),
           Text(row.notes.toString(), style: _textStyle.apply(fontWeightDelta: 1)),
           Divider(),
         ],

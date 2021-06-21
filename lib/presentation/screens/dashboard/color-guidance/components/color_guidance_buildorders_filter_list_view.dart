@@ -6,6 +6,7 @@ import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/compon
 import 'package:colorbuilds/presentation/styles/custom_spaces.dart';
 import 'package:colorbuilds/presentation/widgets/indicators/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ColorGuidanceBuildordersFilterListView extends StatefulWidget {
@@ -20,6 +21,7 @@ class _ColorGuidanceBuildordersFilterListViewState extends State<ColorGuidanceBu
   final BuildordersActions _buildordersActions = BuildordersActions();
 
   void _filterByName(String name) {
+    HapticFeedback.mediumImpact();
     setState(() => _selectedName != name ? _selectedName = name : _selectedName = null);
     _buildordersActions.filterByName(bloc: context.read<BuildordersBloc>(), name: _selectedName);
   }

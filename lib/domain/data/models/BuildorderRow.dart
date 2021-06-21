@@ -1,7 +1,10 @@
 import 'dart:convert';
 
-import 'package:colorbuilds/infrastructure/exceptions/data/BuildorderRowModelDataException.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:colorbuilds/infrastructure/exceptions/data/BuildorderRowModelDataException.dart';
+
+import 'Action.dart';
 
 class BuildorderRow extends Equatable {
   final int id;
@@ -13,6 +16,7 @@ class BuildorderRow extends Equatable {
   final bool mineralsSelected;
   final bool gasSelected;
   final String? notes;
+  final List<Action> actions;
 
   const BuildorderRow({
     required this.id,
@@ -24,6 +28,7 @@ class BuildorderRow extends Equatable {
     required this.mineralsSelected,
     required this.gasSelected,
     this.notes,
+    required this.actions,
   });
 
   BuildorderRow copyWith({
@@ -36,6 +41,7 @@ class BuildorderRow extends Equatable {
     bool? mineralsSelected,
     bool? gasSelected,
     String? notes,
+    List<Action>? actions,
   }) {
     return BuildorderRow(
       id: id ?? this.id,
@@ -47,6 +53,7 @@ class BuildorderRow extends Equatable {
       mineralsSelected: mineralsSelected ?? this.mineralsSelected,
       gasSelected: gasSelected ?? this.gasSelected,
       notes: notes ?? this.notes,
+      actions: actions ?? this.actions,
     );
   }
 
@@ -61,6 +68,7 @@ class BuildorderRow extends Equatable {
       'mineralsSelected': mineralsSelected,
       'gasSelected': gasSelected,
       'notes': notes,
+      'actions': actions.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -76,6 +84,11 @@ class BuildorderRow extends Equatable {
         mineralsSelected: map['mineralsSelected'] as bool,
         gasSelected: map['gasSelected'] as bool,
         notes: map['notes'].toString(),
+        actions: map['actions'] != null
+            ? List<Action>.from(map['actions']?.map(
+                (dynamic x) => Action.fromMap(x as Map<String, dynamic>),
+              ) as Iterable)
+            : [],
       );
     } catch (e) {
       throw BuildorderRowModelDataException(e);
@@ -90,7 +103,9 @@ class BuildorderRow extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props {
+    return [id, mineralsSelected, gasSelected, actions];
+  }
 
   String get getResourcesString {
     if (gasSelected && mineralsSelected) {
