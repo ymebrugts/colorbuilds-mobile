@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:colorbuilds/domain/data/models/Buildorder.dart';
 import 'package:colorbuilds/infrastructure/exceptions/UnexpectedException.dart';
 import 'package:colorbuilds/infrastructure/exceptions/bloc/BuildordersFilterByNameException.dart';
@@ -11,11 +11,12 @@ import 'package:colorbuilds/logic/api_response_status.dart';
 import 'package:colorbuilds/logic/buildorders/api_buildorders_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'buildorders_event.dart';
 part 'buildorders_state.dart';
 
-class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
+class BuildordersBloc extends HydratedBloc<BuildordersEvent, BuildordersState> {
   final FlutterSecureStorage storage;
   final ApiBuildOrdersRepository buildOrdersRepository;
   BuildordersBloc({required this.storage, required this.buildOrdersRepository}) : super(BuildordersInitial());
@@ -95,5 +96,15 @@ class BuildordersBloc extends Bloc<BuildordersEvent, BuildordersState> {
         throw BuildordersFilterByNameException(e);
       }
     }
+  }
+
+  @override
+  BuildordersState? fromJson(Map<String, dynamic> json) {
+    return BuildordersState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(BuildordersState state) {
+    return state.toMap();
   }
 }

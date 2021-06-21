@@ -17,6 +17,8 @@ dependencies:
   flutter_secure_storage: ^4.2.0
   flutter_svg: ^0.22.0
   http: ^0.13.3
+  hydrated_bloc: ^7.0.1
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:
