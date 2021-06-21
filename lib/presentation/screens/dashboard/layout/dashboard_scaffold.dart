@@ -40,7 +40,7 @@ class _DashboardScaffoldState extends State<DashboardScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(padding: const EdgeInsets.all(20), child: _body),
-      appBar: AppBar(title: Text(_title)),
+      appBar: AppBar(brightness: Brightness.dark, title: Text(_title)),
       drawer: DashboardDrawer(
         onMyBuilds: () => _navigate('My.Builds'),
         onColorGuide: () => _navigate('Color.Guidance'),

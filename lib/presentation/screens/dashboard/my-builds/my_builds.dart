@@ -27,14 +27,10 @@ class _MyBuildsScreenState extends State<MyBuildsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<BuildordersBloc, BuildordersState>(
       builder: (context, state) {
-        switch (state.apiResponseStatus.runtimeType) {
-          case ApiResponseStatusSuccess:
-            return SingleChildScrollView(child: MyBuildsBuildorders());
-          case ApiResponseStatusFailure:
-            return CustomFailureMessageWidget();
-          default:
-            return CustomCircularProgressIndicator();
-        }
+        if (state.apiResponseStatus is ApiResponseStatusInProgress)
+          return CustomCircularProgressIndicator();
+        else
+          return SingleChildScrollView(child: MyBuildsBuildorders());
       },
     );
   }
