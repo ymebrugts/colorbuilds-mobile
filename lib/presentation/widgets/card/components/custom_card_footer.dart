@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 class CustomCardFooter extends StatelessWidget {
   const CustomCardFooter({
     Key? key,
-    required this.firstText,
-    required this.secondText,
     this.onSubmit,
     this.onPressed,
+    this.firstWidget,
+    this.secondWidget,
+    required this.firstText,
+    required this.secondText,
   }) : super(key: key);
   final String firstText;
   final String secondText;
+  final Widget? firstWidget;
+  final Widget? secondWidget;
   final VoidCallback? onSubmit;
   final VoidCallback? onPressed;
 
@@ -27,8 +31,13 @@ class CustomCardFooter extends StatelessWidget {
           color: Colors.white,
           onPressed: onPressed,
           textColor: _themeData.accentColor,
+          child: firstWidget,
         ),
-        CustomMaterialButton(text: secondText, onPressed: onSubmit),
+        CustomMaterialButton(
+          text: secondText,
+          onPressed: onSubmit,
+          child: secondWidget,
+        ),
       ],
     );
   }

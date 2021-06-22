@@ -30,7 +30,7 @@ class CustomMaterialButton extends StatelessWidget {
       textColor: textColor ?? Colors.white,
       color: color ?? _themeData.primaryColor,
       padding: padding ?? const EdgeInsets.symmetric(horizontal: 5),
-      child: child ?? Text(text!.toUpperCase()),
+      child: child != null ? Padding(padding: const EdgeInsets.all(10), child: child) : Text(text!.toUpperCase()),
     );
   }
 }
