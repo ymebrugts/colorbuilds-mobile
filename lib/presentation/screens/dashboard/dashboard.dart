@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
   void _resolveListener(BuildContext context, SessionState state) {
-    Navigator.pushReplacementNamed(context, '/');
+    // Navigator.pushReplacementNamed(context, '/');
   }
 
   @override
