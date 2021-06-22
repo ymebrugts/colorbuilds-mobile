@@ -30,10 +30,10 @@ class LoginState extends Equatable {
 }
 
 class LoginInitial extends LoginState {
-  LoginInitial()
+  const LoginInitial()
       : super(
           email: '',
           password: '',
-          formStatus: InitialFormStatus(),
+          formStatus: const InitialFormStatus(),
         );
 }

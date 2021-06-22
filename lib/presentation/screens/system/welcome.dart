@@ -22,8 +22,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
 
-    ///
-
     if (context.read<SessionCubit>().state is InitialSession) {
       _authActions.autoLogin(bloc: context.read<LoginBloc>());
     } else {
@@ -33,10 +31,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   void _resolveNavigation(BuildContext context, SessionState state) {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
-      if (state is AuthenticatedSession)
-        Navigator.pushReplacementNamed(context, '/dashboard');
-      else {
-        Navigator.of(context).pushNamed('/login');
+      if (state is AuthenticatedSession) {
+        Navigator.pushNamed(context, '/dashboard');
+      } else if (state is UnauthenticatedSession) {
+        Navigator.pushReplacementNamed(context, '/login');
+      } else {
+        Navigator.pushNamed(context, '/login');
       }
     });
   }

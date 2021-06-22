@@ -5,7 +5,7 @@ class SessionActions {
   ///
   Future<void> unauthenticate({required SessionCubit cubit}) async {
     final storage = FlutterSecureStorage();
-    await storage.delete(key: 'token');
     cubit.unauthenticate();
+    await storage.delete(key: 'token');
   }
 }

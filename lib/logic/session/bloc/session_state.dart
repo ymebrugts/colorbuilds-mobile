@@ -1,15 +1,24 @@
 part of 'session_cubit.dart';
 
-abstract class SessionState {}
+abstract class SessionState extends Equatable {}
 
-class InitialSession extends SessionState {}
+class InitialSession extends SessionState {
+  @override
+  List<Object?> get props => [];
+}
 
-class AuthenticatedSession extends Equatable implements SessionState {
+class AuthenticatedSession implements SessionState {
   final User user;
   const AuthenticatedSession({required this.user});
 
   @override
   List<Object?> get props => [user];
+
+  @override
+  bool? get stringify => true;
 }
 
-class UnauthenticatedSession extends SessionState {}
+class UnauthenticatedSession extends SessionState {
+  @override
+  List<Object?> get props => [];
+}

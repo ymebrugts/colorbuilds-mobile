@@ -43,7 +43,7 @@ class SignupInitial extends SignupState {
           email: '',
           username: '',
           password: '',
-          formStatus: InitialFormStatus(),
+          formStatus: const InitialFormStatus(),
           emailExists: false,
           usernameExists: false,
         );

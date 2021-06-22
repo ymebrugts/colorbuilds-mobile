@@ -8,21 +8,15 @@ class DashboardDrawerUserCreds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _authState = context.read<SessionCubit>().state as AuthenticatedSession;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 50, 10),
-      child: BlocBuilder<SessionCubit, SessionState>(
-        buildWhen: (_, state) => state is AuthenticatedSession,
-        builder: (context, state) {
-          final _authState = state as AuthenticatedSession;
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DashboardDrawerUserCredRow(icon: Icons.person, text: _authState.user.username.toString()),
-              DashboardDrawerUserCredRow(icon: Icons.email, text: _authState.user.email.toString()),
-            ],
-          );
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DashboardDrawerUserCredRow(icon: Icons.person, text: _authState.user.username.toString()),
+          DashboardDrawerUserCredRow(icon: Icons.email, text: _authState.user.email.toString()),
+        ],
       ),
     );
   }

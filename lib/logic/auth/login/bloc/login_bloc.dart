@@ -43,10 +43,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         final User user = User.fromMap(jwtUtils.parseJwt());
 
-        yield state.copyWith(formStatus: SubmissionSuccess());
-        sessionCubit.authenticate(user);
-
         await storage.write(key: 'token', value: creds.token);
+
+        sessionCubit.authenticate(user);
+        yield state.copyWith(formStatus: SubmissionSuccess());
       } on ApiUnauthenticatedException catch (e) {
         yield state.copyWith(formStatus: SubmissionFailure(e.e));
       } on ApiAuthInternalServerException catch (e) {
