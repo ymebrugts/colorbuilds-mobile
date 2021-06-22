@@ -1,11 +1,11 @@
 import 'package:colorbuilds/domain/data/models/SuccessResponse.dart';
 
 abstract class FormSubmissionStatus {
-  const FormSubmissionStatus();
+  FormSubmissionStatus();
 }
 
 class InitialFormStatus extends FormSubmissionStatus {
-  const InitialFormStatus();
+  InitialFormStatus();
 }
 
 class FormValidating extends FormSubmissionStatus {}
@@ -23,5 +23,5 @@ class SubmissionSuccess extends FormSubmissionStatus {
 
 class SubmissionFailure extends FormSubmissionStatus {
   final dynamic e;
-  const SubmissionFailure(this.e);
+  SubmissionFailure(this.e);
 }

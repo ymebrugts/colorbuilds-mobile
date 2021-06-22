@@ -13,6 +13,7 @@ class LoginCardFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (_, state) => state.formStatus is FormSubmitting || state.formStatus is SubmissionFailure,
       builder: (context, state) {
         final Function()? _onSubmit;
         final CustomCircularProgressIndicator? _secondWidget;

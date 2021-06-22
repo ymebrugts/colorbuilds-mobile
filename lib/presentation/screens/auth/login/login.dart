@@ -15,6 +15,7 @@ class LoginScreen extends StatelessWidget {
 
   void _resolveSubmissionMessage(BuildContext context, LoginState state) {
     final CustomSnackbars customSnackbars = CustomSnackbars(context);
+
     if (state.formStatus is SubmissionFailure) {
       final formStatus = state.formStatus as SubmissionFailure;
       customSnackbars.showErrorMessageSnackbar(formStatus.e.toString());
@@ -26,6 +27,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
+      listenWhen: (_, state) => state.formStatus is SubmissionSuccess || state.formStatus is SubmissionFailure,
       listener: _resolveSubmissionMessage,
       child: AuthScaffold(
         child: Center(

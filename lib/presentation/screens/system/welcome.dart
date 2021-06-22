@@ -21,7 +21,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    _authActions.autoLogin(bloc: context.read<LoginBloc>());
+
+    ///
+
+    if (context.read<SessionCubit>().state is InitialSession) {
+      _authActions.autoLogin(bloc: context.read<LoginBloc>());
+    } else {
+      _resolveNavigation(context, context.read<SessionCubit>().state);
+    }
   }
 
   void _resolveNavigation(BuildContext context, SessionState state) {

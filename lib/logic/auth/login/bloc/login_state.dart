@@ -1,11 +1,13 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../form_submission_status.dart';
 
-class LoginState {
+class LoginState extends Equatable {
   final String email;
   final String password;
   final FormSubmissionStatus formStatus;
 
-  LoginState({
+  const LoginState({
     required this.email,
     required this.password,
     required this.formStatus,
@@ -22,6 +24,9 @@ class LoginState {
       formStatus: formStatus ?? this.formStatus,
     );
   }
+
+  @override
+  List<Object?> get props => [formStatus];
 }
 
 class LoginInitial extends LoginState {
@@ -29,6 +34,6 @@ class LoginInitial extends LoginState {
       : super(
           email: '',
           password: '',
-          formStatus: const InitialFormStatus(),
+          formStatus: InitialFormStatus(),
         );
 }
