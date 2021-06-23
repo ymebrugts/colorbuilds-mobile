@@ -9,12 +9,14 @@ class CustomElevatedButton extends StatelessWidget {
     this.text = '',
     this.onPressed,
     this.borderRadius,
+    this.upperCase = true,
     required this.textColor,
     required this.borderColor,
     required this.backgroundColor,
   }) : super(key: key);
   final Widget? child;
   final String? text;
+  final bool upperCase;
   final IconData? icon;
   final Color textColor;
   final Color borderColor;
@@ -48,7 +50,7 @@ class CustomElevatedButton extends StatelessWidget {
       child: child ??
           (icon != null
               ? Icon(icon, color: textColor, size: _textStyle.apply(fontSizeDelta: 10).fontSize)
-              : Text(text!.toUpperCase(), style: _textStyle)),
+              : Text(upperCase ? text!.toUpperCase() : text.toString(), style: _textStyle)),
     );
   }
 }

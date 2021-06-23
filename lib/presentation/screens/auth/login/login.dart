@@ -16,8 +16,6 @@ class LoginScreen extends StatelessWidget {
   void _resolveSubmissionMessage(BuildContext context, LoginState state) {
     final CustomSnackbars customSnackbars = CustomSnackbars(context);
 
-    print(state);
-
     if (state.formStatus is SubmissionFailure) {
       final formStatus = state.formStatus as SubmissionFailure;
       customSnackbars.showErrorMessageSnackbar(formStatus.e.toString());

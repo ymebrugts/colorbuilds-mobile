@@ -42,7 +42,7 @@ class _ColorGuidanceBuildordersFilterListViewState extends State<ColorGuidanceBu
                   children: [
                     customVerticalSpace,
                     ColorGuidanceBuildorderFilterButton(
-                      builderName: items[i].name,
+                      buildorder: items[i],
                       selected: items[i].name == _selectedName,
                       onSelect: () => _filterByName(items[i].name),
                     ),
