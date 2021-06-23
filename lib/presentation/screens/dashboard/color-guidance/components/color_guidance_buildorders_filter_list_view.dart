@@ -28,28 +28,25 @@ class _ColorGuidanceBuildordersFilterListViewState extends State<ColorGuidanceBu
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuildordersBloc, BuildordersState>(
-      builder: (context, state) {
-        final List<Buildorder> items = state.buildorders;
+    final state = context.read<BuildordersBloc>().state;
+    final List<Buildorder> items = state.filtered;
 
-        return state.apiResponseStatus is ApiResponseStatusInProgress
-            ? CustomCircularProgressIndicator()
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: items.length,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (BuildContext context, int i) => Column(
-                  children: [
-                    customVerticalSpace,
-                    ColorGuidanceBuildorderFilterButton(
-                      buildorder: items[i],
-                      selected: items[i].name == _selectedName,
-                      onSelect: () => _filterByName(items[i].name),
-                    ),
-                  ],
+    return state.apiResponseStatus is ApiResponseStatusInProgress
+        ? CustomCircularProgressIndicator()
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: items.length,
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int i) => Column(
+              children: [
+                customVerticalSpace,
+                ColorGuidanceBuildorderFilterButton(
+                  buildorder: items[i],
+                  onSelect: () => _filterByName(items[i].name),
+                  selected: items[i].name == _selectedName || items.length == 1,
                 ),
-              );
-      },
-    );
+              ],
+            ),
+          );
   }
 }
