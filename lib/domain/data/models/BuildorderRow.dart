@@ -110,9 +110,9 @@ class BuildorderRow extends Equatable {
   String get getResourcesString {
     if (gasSelected && mineralsSelected) {
       return '@$resources Gas - @$resources Minerals';
-    } else if (gasSelected) {
+    } else if (gasSelected && resources! > 0) {
       return '@$resources Gas';
-    } else if (mineralsSelected) {
+    } else if (mineralsSelected && resources! > 0) {
       return '@$resources Minerals';
     }
     return '';

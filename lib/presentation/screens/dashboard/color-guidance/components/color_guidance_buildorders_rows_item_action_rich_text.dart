@@ -14,10 +14,14 @@ class ColorGuidanceBuildordersRowsItemActionRichText extends StatelessWidget {
   Widget build(BuildContext context) {
     final ActionHelper _actionHelper = ActionHelper();
 
+    final String _supply = row.supply != null && row.supply! > 0 ? '${row.supply} -' : '';
+    final String _minutes = row.minutes != null && row.minutes! > 0 ? ' ${row.minutes}' : '';
+    final String _seconds = row.seconds != null && row.seconds! > 0 ? ':${row.seconds} -' : '';
+
     return RichText(
       text: TextSpan(
         style: textStyle,
-        text: '${row.supply} - (${row.minutes}:${row.seconds}) - ${row.getResourcesString} ',
+        text: '$_supply$_minutes$_seconds${row.getResourcesString} ',
         children: row.actions
             .map(
               (action) => TextSpan(
