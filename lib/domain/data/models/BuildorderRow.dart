@@ -76,7 +76,7 @@ class BuildorderRow extends Equatable {
     try {
       return BuildorderRow(
         id: int.parse(map['id'].toString()),
-        orderRow: int.tryParse(map['orderRow'].toString()),
+        orderRow: double.tryParse(map['order'].toString())?.floor(),
         supply: int.tryParse(map['supply'].toString()),
         minutes: int.tryParse(map['minutes'].toString()),
         seconds: int.tryParse(map['seconds'].toString()),

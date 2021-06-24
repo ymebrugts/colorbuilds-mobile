@@ -53,7 +53,7 @@ class _ColorGuidanceScreenState extends State<ColorGuidanceScreen> {
 
               if (items.length == 1) {
                 if (state.apiResponseStatus is ApiResponseStatusInProgress) return CustomCircularProgressIndicator();
-                return ColorGuidanceBuildordersRowsListView(rows: items.first.rows ?? []);
+                return ColorGuidanceBuildordersRowsListView(rows: items.first.getOrderedRows);
               }
               return SizedBox();
             },

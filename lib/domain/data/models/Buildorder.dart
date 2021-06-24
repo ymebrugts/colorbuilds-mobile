@@ -101,4 +101,14 @@ class Buildorder extends Equatable {
   String? get getYourRace => _racesMap[int.parse(yourRace!)];
 
   String? get getOpponentRace => _racesMap[int.parse(opponentRace!)];
+
+  List<BuildorderRow> get getOrderedRows {
+    if (rows != null) {
+      final _rows = List<BuildorderRow>.from(rows!);
+      _rows.sort((a, b) => a.orderRow!.compareTo(b.orderRow!));
+      return _rows;
+    }
+
+    return [];
+  }
 }
