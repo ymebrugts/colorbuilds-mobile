@@ -45,6 +45,7 @@ class _ColorGuidanceScreenState extends State<ColorGuidanceScreen> {
             builder: (context, state) =>
                 state.filtered.isNotEmpty ? ColorGuidanceBuildordersFilterListView() : SizedBox(),
           ),
+          SizedBox(height: 5),
           Divider(),
           SizedBox(height: 5),
           BlocBuilder<BuildordersBloc, BuildordersState>(
@@ -58,6 +59,7 @@ class _ColorGuidanceScreenState extends State<ColorGuidanceScreen> {
               return SizedBox();
             },
           ),
+          SizedBox(height: 5),
           BlocBuilder<BuildordersBloc, BuildordersState>(
             builder: (_, state) => state.filtered.length == 1
                 ? Text(
