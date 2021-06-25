@@ -1,3 +1,4 @@
+import 'package:colorbuilds/infrastructure/services/analytics_service.dart';
 import 'package:colorbuilds/logic/session/bloc/session_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class App extends StatelessWidget {
           builder: (context, constraints) {
             return MaterialApp(
               title: 'ColorBuilds',
+              navigatorObservers: <NavigatorObserver>[FirebaseAnalyticsService().getObserver],
               theme: MTStheme.customThemeData(DeviceScreenMixin.getDeviceScreenSize(context)),
               onGenerateRoute: (settings) => _appRouter.onGenerateRoute(context, settings),
             );
