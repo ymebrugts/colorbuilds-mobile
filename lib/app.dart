@@ -1,4 +1,3 @@
-import 'package:colorbuilds/infrastructure/services/analytics_service.dart';
 import 'package:colorbuilds/logic/session/bloc/session_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'app/routes/app_router.dart';
 import 'infrastructure/Mixins/DeviceScreenMixin.dart';
+import 'infrastructure/services/firebase/analytics_service.dart';
 import 'logic/auth/api_auth_repository.dart';
 import 'logic/auth/login/bloc/login_bloc.dart';
 import 'presentation/mts_theme.dart';
