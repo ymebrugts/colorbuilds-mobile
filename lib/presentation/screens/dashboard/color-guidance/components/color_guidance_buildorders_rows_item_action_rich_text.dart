@@ -1,7 +1,7 @@
 import 'package:colorbuilds/domain/data/models/BuildorderRow.dart';
 import 'package:colorbuilds/presentation/screens/dashboard/color-guidance/helpers/action_helper.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../mts_theme.dart';
 
 class ColorGuidanceBuildordersRowsItemActionRichText extends StatelessWidget {
@@ -13,10 +13,12 @@ class ColorGuidanceBuildordersRowsItemActionRichText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ActionHelper _actionHelper = ActionHelper();
+    final NumberFormat formatter = NumberFormat('00');
 
     final String _supply = row.supply != null && row.supply! > 0 ? '${row.supply} -' : '';
-    final String _minutes = row.minutes != null && row.minutes! > 0 ? ' ${row.minutes}' : '';
-    final String _seconds = row.seconds != null && row.seconds! > 0 ? ':${row.seconds} -' : '';
+    final String _minutes = row.minutes != null && row.minutes! > 0 ? ' (${row.minutes}' : '';
+    final String _seconds =
+    row.seconds != null && row.seconds! >= 0 && row.minutes! > 0 ? ':${formatter.format(row.seconds)}) -' : '';
 
     return RichText(
       text: TextSpan(
